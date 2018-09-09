@@ -35,53 +35,14 @@ class AZRQnAMakerService
         this.processArgumentNullErrorResponse = function(response, responseCallback)
         {
             
-            let evalError = new EvalError(AZRConstants.ExceptionMessages.KArgumentNullMessage);
+            let evalError = new EvalError(AZRConstants.ExceptionMessages
+                                                        .KArgumentNullMessage);
             responseCallback(response, null, evalError);
             
         };
         
         this.routerInfo = routerInfo;
         this.azureQnAMakerProxy = azureQnAMakerProxy;
-
-    }
-
-    checkStatusAsync(responseCallback)
-    {
-
-        const self = this;
-        this.routerInfo.get("/knowledgebase/status/:kbId",
-                            (request, response) =>
-        {
-
-            if ((request === null) || (request === undefined))
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let kbIdString = request.params.kbId;
-            if (Utils.isNullOrEmptyString(kbIdString) === true)
-            {
-
-                self.processArgumentNullErrorResponse(response, responseCallback);
-                return;
-
-            }
-
-            let qnaMakerBinderProxy = self.pepareQnAMakerClient(request,
-                                                                AZRConstants
-                                                                .QnAMakerHeaders
-                                                                .KSubscriptionKey);
-            qnaMakerBinderProxy.checkStatusAsync(kbIdString,
-                                                (responseBody, error) =>
-            {
-
-                responseCallback(response, responseBody, error);
-                
-            });
-        });
 
     }
 
@@ -552,7 +513,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.put("/knowledgebases/:kbId", (request, response) =>
+        this.routerInfo.delete("/knowledgebases/delete/:kbId", (request, response) =>
         {
 
             if ((request === null) || (request === undefined))
@@ -577,12 +538,44 @@ class AZRQnAMakerService
                                                                 .QnAMakerHeaders
                                                                 .KSubscriptionKey);
             qnaMakerBinderProxy.deleteKnowledgeBaseAsync(kbIdString,
-                                                            request.body,
                                                             (responseBody,
                                                                 error) =>
             {
 
                 responseCallback(response, responseBody, error);
+                
+            });
+        });
+    }
+
+    deleteAllKnowledgeBasesAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.delete("/knowledgebases/all/delete", (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let qnaMakerBinderProxy = self.pepareQnAMakerClient(request,
+                                                                AZRConstants
+                                                                .QnAMakerHeaders
+                                                                .KSubscriptionKey);
+            qnaMakerBinderProxy.deleteAllKnowledgeBasesAsync((responsesArray,
+                                                                errorsArray) =>
+            {
+
+                let responseBody = {};
+                responseBody.responses = responsesArray;
+                responseBody.errors = errorsArray;
+
+                responseCallback(response, responseBody, null);
                 
             });
         });

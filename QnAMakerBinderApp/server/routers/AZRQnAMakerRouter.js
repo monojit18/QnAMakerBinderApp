@@ -15,7 +15,6 @@ class AZRQnAMakerRouter extends AZRQnABaseRouter
         {
             
             let qnaMakerService = new AZRQnAMakerService(routerInfo, AZRQnAMakerProxy);
-            qnaMakerService.checkStatusAsync(this.responseCallback);            
             qnaMakerService.getKnowledgeBasesForUserAsync(this.responseCallback);
             qnaMakerService.getKnowledgeBaseDetailsAsync(this.responseCallback);
             qnaMakerService.getEndpointKeysAsync(this.responseCallback);            
@@ -30,6 +29,7 @@ class AZRQnAMakerRouter extends AZRQnABaseRouter
             qnaMakerService.replaceKnowledgeBaseAsync(this.responseCallback);
             qnaMakerService.replaceAlterationAsync(this.responseCallback);            
             qnaMakerService.deleteKnowledgeBaseAsync(this.responseCallback);
+            qnaMakerService.deleteAllKnowledgeBasesAsync(this.responseCallback);
             
         };
         
