@@ -266,7 +266,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.post("/knowledgebase/create",
+        this.routerInfo.put("/knowledgebase/create",
                             (request, response) =>
         {
 
@@ -296,7 +296,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.post("/knowledgebase/createandpublish",
+        this.routerInfo.put("/knowledgebase/createandpublish",
                             (request, response) =>
         {
 
@@ -327,7 +327,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.post("/knowledgebase/:kbId/publish",
+        this.routerInfo.put("/knowledgebase/:kbId/publish",
                             (request, response) =>
         {
 
@@ -366,7 +366,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.patch("/knowledgebases/:kbId/update",
+        this.routerInfo.post("/knowledgebases/:kbId/update",
                                 (request, response) =>
         {
 
@@ -405,7 +405,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.patch("/endpointkeys/:keyType/refresh",
+        this.routerInfo.post("/endpointkeys/:keyType/refresh",
                                 (request, response) =>
         {
 
@@ -444,7 +444,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.put("/knowledgebases/:kbId", (request, response) =>
+        this.routerInfo.post("/knowledgebases/:kbId", (request, response) =>
         {
 
             if ((request === null) || (request === undefined))
@@ -484,7 +484,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.put("/alterations", (request, response) =>
+        this.routerInfo.post("/alterations", (request, response) =>
         {
 
             if ((request === null) || (request === undefined))
