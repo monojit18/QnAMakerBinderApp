@@ -50,3 +50,111 @@
       }
 
     ```
+    
+   8. **URL** - https://<host_server_details>/qnamaker/knowledgebase/createandpublish<br/>
+      **PUT request body-**
+    
+    ```
+      {
+        "name": "QnA Maker New FAQ - 1708(2)",
+        "qnaList": [
+          {
+            "id": 0,
+            "answer": "Feeling good!!!",
+            "source": "",
+            "questions": [
+              "Any Venetarian options you have?"
+            ],
+            "metadata": []
+          }
+        ]
+      }
+    
+    ```
+    
+ 9. **URL** - https://<host_server_details>/qnamaker/knowledgebase/:kbId/publish<br/>
+    **PUT request-**
+  
+    
+10. **URL** - https://<host_server_details>/qnamaker/knowledgebase/:kbId/update<br/>
+    **POST request body-**
+    
+    ```
+      {
+          "update":
+          {
+            "questions":
+            [
+              "Do you have any vegetarian options today?"
+            ]
+          }
+      }
+    
+    ```  
+    
+11. **URL** - https://<host_server_details>/qnamaker/endpointkeys/:keyType/refresh<br/>
+    **POST request-**
+    
+    
+12. **URL** - https://<host_server_details>/qnamaker/knowledgebases/:kbId/replace<br/>
+    **POST request body-**
+    
+    ```
+      {
+        "qnAList": [
+          {
+            "id": 0,
+            "answer": "string",
+            "source": "string",
+            "questions": [
+              "string"
+            ],
+            "metadata": [
+              {
+                "name": "string",
+                "value": "string"
+              }
+            ]
+          }
+        ]
+      }
+    
+    ``` 
+    
+13. **URL** - https://<host_server_details>/qnamaker/alterations/replace<br/>
+    **POST request body-**
+    
+    ```
+      {
+        "wordAlterations": [
+          {
+            "alterations": [
+              "qnamaker",
+              "qna maker"
+            ]
+          },
+          {
+            "alterations": [
+              "botframework",
+              "bot framework"
+            ]
+          },
+          {
+            "alterations": [
+              "webchat",
+              "web chat"
+            ]
+          }
+        ]
+      }
+    
+    ``` 
+    
+14. **URL** - https://<host_server_details>/qnamaker/knowledgebases/delete/:kbId<br/>
+    **DELETE request-**
+    
+
+15. **URL** - https://<host_server_details>/qnamaker/knowledgebases/all/delete<br/>
+    **DELETE request-**
+    
+    
