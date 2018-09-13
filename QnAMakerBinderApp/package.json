@@ -15,18 +15,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node AZRQnAMakerServer.js 1> logs/AZRQnAMakerServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save-dev body-parser express"
+    "install": "npm install --unsafe-perm --save body-parser express azure_qnamaker_binder"
   },
   "keywords": [
     "Azure"
   ],
   "engines": {
     "node": ">=8.9.3"
-  },
-  "devDependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
-    "request": "^2.88.0"
-  },
-  "dependencies": {}
+  }
 }
