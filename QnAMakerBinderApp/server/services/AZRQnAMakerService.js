@@ -444,7 +444,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.post("/knowledgebases/:kbId", (request, response) =>
+        this.routerInfo.post("/knowledgebases/:kbId/replace", (request, response) =>
         {
 
             if ((request === null) || (request === undefined))
@@ -484,7 +484,7 @@ class AZRQnAMakerService
     {
 
         const self = this;
-        this.routerInfo.post("/alterations", (request, response) =>
+        this.routerInfo.post("/alterations/replace", (request, response) =>
         {
 
             if ((request === null) || (request === undefined))
