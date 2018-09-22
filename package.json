@@ -24,7 +24,7 @@
     "node": ">=8.9.3"
   },
   "dependencies": {
-    "azure_qnamaker_binder": "^1.0.1",
+    "azure_qnamaker_binder": "^1.0.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
   }
