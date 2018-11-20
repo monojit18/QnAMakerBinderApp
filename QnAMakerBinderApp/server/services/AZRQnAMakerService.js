@@ -27,7 +27,15 @@ class AZRQnAMakerService
 
             }
             
-            let qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString);
+            const qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString);
+            return qnaMakerClient;
+            
+        };
+
+        this.pepareQnAMakerClientForAnswer = function()
+        {
+ 
+            const qnaMakerClient = new _self.azureQnAMakerProxy(null);
             return qnaMakerClient;
             
         };
@@ -315,6 +323,45 @@ class AZRQnAMakerService
             qnaMakerBinderProxy.createAndPublishKnowledgeBaseAsync(request.body,
                                                                     (responseBody,
                                                                         error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });
+    }
+
+    generateAnswerAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.post("/knowledgebase/:kbId/answer/generate",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let kbIdString = request.params.kbId;
+            if (Utils.isNullOrEmptyString(kbIdString) === true)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let qnaMakerBinderProxy = self.pepareQnAMakerClient(request,
+                                                                AZRConstants
+                                                                .QnAMakerHeaders
+                                                                .KSubscriptionKey);
+            qnaMakerBinderProxy.generateAnswerAsync(kbIdString,request.body,
+                                                    (responseBody, error) =>
             {
 
                 responseCallback(response, responseBody, error);
