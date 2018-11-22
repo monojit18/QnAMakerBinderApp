@@ -27,15 +27,32 @@ class AZRQnAMakerService
 
             }
             
-            const qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString);
+            const qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString,
+                                                                null);
             return qnaMakerClient;
             
         };
 
-        this.pepareQnAMakerClientForAnswer = function()
+        this.pepareQnAMakerClientForAnswer = function(request)
         {
  
-            const qnaMakerClient = new _self.azureQnAMakerProxy(null);
+            if ((request === null) || (request === undefined))
+                return null;
+            
+            let authKeyString = process.env[AZRConstants.QnAMakerHeaders
+                                                .KAuthKey];
+            if (Utils.isNullOrEmptyString(authKeyString) == true)
+            {
+
+                authKeyString = request.get(AZRConstants.QnAMakerHeaders
+                                                    .KAuthKey);
+                if (Utils.isNullOrEmptyString(authKeyString) == true)                
+                    return null;
+
+            }
+
+            const qnaMakerClient = new _self.azureQnAMakerProxy(null,
+                                                                authKeyString);
             return qnaMakerClient;
             
         };
@@ -356,11 +373,8 @@ class AZRQnAMakerService
 
             }
 
-            let qnaMakerBinderProxy = self.pepareQnAMakerClient(request,
-                                                                AZRConstants
-                                                                .QnAMakerHeaders
-                                                                .KSubscriptionKey);
-            qnaMakerBinderProxy.generateAnswerAsync(kbIdString,request.body,
+            let qnaMakerBinderProxy = self.pepareQnAMakerClientForAnswer(request);
+            qnaMakerBinderProxy.generateAnswerAsync(kbIdString, request.body,
                                                     (responseBody, error) =>
             {
 
