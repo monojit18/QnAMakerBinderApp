@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node AZRQnAMakerServer.js 1> logs/AZRQnAMakerServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save-dev body-parser express azure_qnamaker_binder"
+    "install": "npm install --unsafe-perm --save-dev body-parser express"
   },
   "keywords": [
     "Azure"

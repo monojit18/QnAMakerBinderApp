@@ -6,12 +6,12 @@ class AZRQnAMakerServer
     constructor()
     {
                 
-        const nodeModulesPathString = "./node_modules/";  
+        const nodeModulesPathString = "../node_modules/";  
         const Http = require("http");
         const BodyParser = require(nodeModulesPathString + "body-parser");
         const Express = require(nodeModulesPathString + "express");
-        const AZRConstants = require("./server/commons/AZRConstants");
-        const AZRQnAMakerRouter = require("./server/routers/AZRQnAMakerRouter");
+        const AZRConstants = require("./commons/AZRConstants");
+        const AZRQnAMakerRouter = require("./routers/AZRQnAMakerRouter");
         const QnAMakerBinderProxy = require(nodeModulesPathString + "azure_qnamaker_binder");
 
         const _self = this;
