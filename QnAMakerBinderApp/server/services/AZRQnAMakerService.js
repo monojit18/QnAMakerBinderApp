@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 const AZRConstants = require("../commons/AZRConstants");
+// const Utils = require("../commons/Utils");
 const Utils = require("../../node_modules/utility_helper");
 
 class AZRQnAMakerService
@@ -10,7 +11,7 @@ class AZRQnAMakerService
     {
         
         const _self = this;
-        this.pepareQnAMakerClient = function(request, qnaMakerAPIKey)
+        this.pepareQnAMakerClient = (request, qnaMakerAPIKey) =>
         {
  
             if ((request === null) || (request === undefined))
@@ -21,7 +22,7 @@ class AZRQnAMakerService
             {
 
                 subscriptionKeyString = request.get(AZRConstants.QnAMakerHeaders
-                                                    .KSubscriptionKey);
+                                                                .KSubscriptionKey);
                 if (Utils.isNullOrEmptyString(subscriptionKeyString) == true)                
                     return null;
 
@@ -33,19 +34,19 @@ class AZRQnAMakerService
             
         };
 
-        this.pepareQnAMakerClientForAnswer = function(request)
+        this.pepareQnAMakerClientForAnswer = (request) =>
         {
  
             if ((request === null) || (request === undefined))
                 return null;
             
             let authKeyString = process.env[AZRConstants.QnAMakerHeaders
-                                                .KAuthKey];
+                                                        .KAuthKey];
             if (Utils.isNullOrEmptyString(authKeyString) == true)
             {
 
                 authKeyString = request.get(AZRConstants.QnAMakerHeaders
-                                                    .KAuthKey);
+                                                        .KAuthKey);
                 if (Utils.isNullOrEmptyString(authKeyString) == true)                
                     return null;
 
@@ -57,7 +58,7 @@ class AZRQnAMakerService
             
         };
         
-        this.processArgumentNullErrorResponse = function(response, responseCallback)
+        this.processArgumentNullErrorResponse = (response, responseCallback) =>
         {
             
             let evalError = new EvalError(AZRConstants.ExceptionMessages
