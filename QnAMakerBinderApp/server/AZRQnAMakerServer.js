@@ -8,11 +8,13 @@ class AZRQnAMakerServer
                 
         const nodeModulesPathString = "../node_modules/";  
         const Http = require("http");
+        const Path = require("path");
         const BodyParser = require(nodeModulesPathString + "body-parser");
         const Express = require(nodeModulesPathString + "express");
         const AZRConstants = require("./commons/AZRConstants");
         const AZRQnAMakerRouter = require("./routers/AZRQnAMakerRouter");
         const QnAMakerBinderProxy = require(nodeModulesPathString + "azure_qnamaker_binder");
+        const DotEnv = require(nodeModulesPathString + "dotenv");
 
         const _self = this;
         let _express = Express();
@@ -33,6 +35,12 @@ class AZRQnAMakerServer
                 extended: true
 
             }));
+
+            _express.use(BodyParser.text());
+
+            const ENV_FILE = Path.join(__dirname, "../.env");
+            DotEnv.config({ path: ENV_FILE });
+
         };
         
         var prepareDefaultResponse = function()
