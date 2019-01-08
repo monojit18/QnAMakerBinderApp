@@ -29,7 +29,8 @@ const DefaultResponseMessages =
 const QnAMakerHeaders =
 {
 
-    KSubscriptionKey : "Ocp-Apim-Subscription-Key"
+    KSubscriptionKey : "Ocp-Apim-Subscription-Key",
+    KAuthKey : "Authorization"
         
 };
 

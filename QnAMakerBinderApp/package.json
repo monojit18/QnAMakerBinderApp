@@ -1,6 +1,6 @@
 {
   "name": "azure_qnamaker_server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "author": "Monojit Datta",
   "license": "MIT",
@@ -15,7 +15,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node AZRQnAMakerServer.js 1> logs/AZRQnAMakerServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save body-parser express azure_qnamaker_binder"
+    "install": "npm install --unsafe-perm --save body-parser express azure_qnamaker_binder dotenv"
   },
   "keywords": [
     "Azure"
@@ -26,6 +26,7 @@
   "dependencies": {
     "azure_qnamaker_binder": "^1.0.3",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3"
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
   }
 }

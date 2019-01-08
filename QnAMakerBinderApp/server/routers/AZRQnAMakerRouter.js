@@ -23,6 +23,7 @@ class AZRQnAMakerRouter extends AZRQnABaseRouter
             qnaMakerService.downloadAlterationsAsync(this.responseCallback);
             qnaMakerService.createKnowledgeBaseAsync(this.responseCallback);
             qnaMakerService.createAndPublishKnowledgeBaseAsync(this.responseCallback);
+            qnaMakerService.generateAnswerAsync(this.responseCallback);
             qnaMakerService.publishKnowledgeBaseAsync(this.responseCallback);
             qnaMakerService.updateKnowledgeBaseAsync(this.responseCallback);
             qnaMakerService.refreshEndpointKeysAsync(this.responseCallback);

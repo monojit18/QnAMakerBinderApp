@@ -2,6 +2,7 @@
 
 const AZRConstants = require("../commons/AZRConstants");
 const Utils = require("../commons/Utils");
+// const Utils = require("../../node_modules/utility_helper");
 
 class AZRQnAMakerService
 {
@@ -10,7 +11,7 @@ class AZRQnAMakerService
     {
         
         const _self = this;
-        this.pepareQnAMakerClient = function(request, qnaMakerAPIKey)
+        this.pepareQnAMakerClient = (request, qnaMakerAPIKey) =>
         {
  
             if ((request === null) || (request === undefined))
@@ -21,18 +22,43 @@ class AZRQnAMakerService
             {
 
                 subscriptionKeyString = request.get(AZRConstants.QnAMakerHeaders
-                                                    .KSubscriptionKey);
+                                                                .KSubscriptionKey);
                 if (Utils.isNullOrEmptyString(subscriptionKeyString) == true)                
                     return null;
 
             }
             
-            let qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString);
+            const qnaMakerClient = new _self.azureQnAMakerProxy(subscriptionKeyString,
+                                                                null);
+            return qnaMakerClient;
+            
+        };
+
+        this.pepareQnAMakerClientForAnswer = (request) =>
+        {
+ 
+            if ((request === null) || (request === undefined))
+                return null;
+            
+            let authKeyString = process.env[AZRConstants.QnAMakerHeaders
+                                                        .KAuthKey];
+            if (Utils.isNullOrEmptyString(authKeyString) == true)
+            {
+
+                authKeyString = request.get(AZRConstants.QnAMakerHeaders
+                                                        .KAuthKey);
+                if (Utils.isNullOrEmptyString(authKeyString) == true)                
+                    return null;
+
+            }
+
+            const qnaMakerClient = new _self.azureQnAMakerProxy(null,
+                                                                authKeyString);
             return qnaMakerClient;
             
         };
         
-        this.processArgumentNullErrorResponse = function(response, responseCallback)
+        this.processArgumentNullErrorResponse = (response, responseCallback) =>
         {
             
             let evalError = new EvalError(AZRConstants.ExceptionMessages
@@ -315,6 +341,42 @@ class AZRQnAMakerService
             qnaMakerBinderProxy.createAndPublishKnowledgeBaseAsync(request.body,
                                                                     (responseBody,
                                                                         error) =>
+            {
+
+                responseCallback(response, responseBody, error);
+                
+            });
+        });
+    }
+
+    generateAnswerAsync(responseCallback)
+    {
+
+        const self = this;
+        this.routerInfo.post("/knowledgebase/:kbId/answer/generate",
+                            (request, response) =>
+        {
+
+            if ((request === null) || (request === undefined))
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let kbIdString = request.params.kbId;
+            if (Utils.isNullOrEmptyString(kbIdString) === true)
+            {
+
+                self.processArgumentNullErrorResponse(response, responseCallback);
+                return;
+
+            }
+
+            let qnaMakerBinderProxy = self.pepareQnAMakerClientForAnswer(request);
+            qnaMakerBinderProxy.generateAnswerAsync(kbIdString, request.body,
+                                                    (responseBody, error) =>
             {
 
                 responseCallback(response, responseBody, error);
