@@ -1,6 +1,6 @@
 {
   "name": "azure_qnamaker_server",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "description": "",
   "author": "Monojit Datta",
   "license": "MIT",
@@ -14,19 +14,25 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node AZRQnAMakerServer.js 1> logs/AZRQnAMakerServer.log 2>& 1",
-    "install": "npm install --unsafe-perm --save-dev body-parser express dotenv"
+    "preinstall": "mkdir -p logs",
+    "install": "npm install --unsafe-perm --save-dev body-parser express dotenv grunt grunt-contrib-jshint grunt-contrib-watch grunt-run",
+    "postinstall": "npm link utility_helper azure_qnamaker_binder",
+    "start": "node server/AZRQnAMakerServer.js 1> logs/AZRQnAMakerServer.log 2>& 1"
   },
   "keywords": [
     "Azure"
   ],
   "engines": {
-    "node": ">=8.9.3"
+    "node": ">=10"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-run": "^0.8.1"
   },
   "dependencies": {}
 }
